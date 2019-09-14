@@ -1,4 +1,5 @@
 *.csv
+*.db
 .idea/
 env/
 config.py
