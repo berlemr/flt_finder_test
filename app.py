@@ -27,6 +27,8 @@ def login():
     if form.validate_on_submit():
         flash('Login requested for user {}, remember_me={}'.format(
             form.username.data, form.remember_me.data))
+        print('Login requested for user {}, remember_me={}, from={}'.format(
+            form.username.data, form.remember_me.data, form.from_date.data))
         return redirect('/')
     return render_template('form.html', title='Sign In', form=form)
 
