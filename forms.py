@@ -11,4 +11,4 @@ class LoginForm(FlaskForm):
     autocomplete = StringField('autocomp', id='autocomplete', validators=[DataRequired()])
 
     remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Sign In', render_kw={"onclick": "$('#loading').show();"})

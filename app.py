@@ -1,4 +1,5 @@
 import os
+import time
 
 from flask import Flask, render_template, flash, redirect, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
@@ -17,7 +18,6 @@ class Destination(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String(80), unique=True, nullable=False)
 
-#NAMES=["London","Paris","Tokyo","Toronto"]
 NAMES = [i.city for i in Destination.query.all()]
 
 @app.route('/')
@@ -44,6 +44,7 @@ def login():
             form.username.data, form.remember_me.data))
         print('Login requested for user {}, remember_me={}, from={}, destination={}'.format(
             form.username.data, form.remember_me.data, form.from_date.data, form.autocomplete.data))
+        time.sleep(20)
         return redirect('/')
     return render_template('form.html', title='Sign In', form=form)
 
