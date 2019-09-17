@@ -19,6 +19,7 @@
         <p>
             <b>from this date</b> <br>
             {{ form.from_date(type='date') }}<br>
+
             <b>to this date</b> <br>
             {{ form.to_date(type='date') }}<br>
         </p>
@@ -37,6 +38,11 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
+        <p>
+            <label for = "autocomplete"> <b>Destination</b> </label><br>
+            {{ form.autocomplete }}
+            <!--<input id = "autocomplete">-->
+        </p>
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
     </form>
@@ -46,7 +52,31 @@
         <h4>{{ error }}</h4>
       {% endfor %}
     </div>
-    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Javascript -->
+    <script>
+    $(function() {
+        $.ajax({
+            url: '{{ url_for("autocomplete") }}'
+            }).done(function (data) {
+                $('#autocomplete').autocomplete({
+                    source: data.json_list,
+                    minLength: 2
+                });
+            });
+        });
+    </script>
+
+
+    <script>
+     $(function() {
+        $( "#to_date-1" ).datepicker();
+     });
+    </script>
+
   </body>
 </html>
