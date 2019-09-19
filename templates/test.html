@@ -1,33 +1,47 @@
-<!doctype html>
-<html lang = "en">
-   <head>
-      <meta charset = "utf-8">
-      <title>jQuery UI Autocomplete functionality</title>
-      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
-      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Javascript -->
-    <script>
-    $(function() {
-        $.ajax({
-            url: '{{ url_for("autocomplete") }}'
-            }).done(function (data) {
-                $('#autocomplete').autocomplete({
-                    source: data.json_list,
-                    minLength: 2
-                });
-            });
-        });
-    </script>
-   </head>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
 
-   <body>
-      <!-- HTML -->
-      <div class = "ui-widget">
-         <p>Type "a" or "s"</p>
-         <label for = "autocomplete">Tags: </label>
-         <input id = "autocomplete">
-      </div>
-   </body>
+</head>
+<body>
+
+<h2>Tabs</h2>
+<p>Click on the buttons inside the tabbed menu:</p>
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'option-1')">A</button>
+  <button class="tablinks" onclick="openTab(event, 'option-2')">B</button>
+</div>
+
+<div id="option-1" class="tabcontent">
+  <h3>First option</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="option-2" class="tabcontent">
+  <h3>Second option</h3>
+  <p>Paris is the capital of France.</p>
+</div>
+
+<script>
+function openTab(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+</body>
 </html>
